@@ -7,14 +7,6 @@ namespace My_movie_manager.Models
 {
     public class movieDetails
     {
-        public class Rating
-        {
-            public string Source { get; set; }
-            public string Value { get; set; }
-        }
-
-        public class Root
-        {
             public string Title { get; set; }
             public string Year { get; set; }
             public string Rated { get; set; }
@@ -29,7 +21,6 @@ namespace My_movie_manager.Models
             public string Country { get; set; }
             public string Awards { get; set; }
             public string Poster { get; set; }
-            public List<Rating> Ratings { get; set; }
             public string Metascore { get; set; }
             public string imdbRating { get; set; }
             public string imdbVotes { get; set; }
@@ -40,7 +31,5 @@ namespace My_movie_manager.Models
             public string Production { get; set; }
             public string Website { get; set; }
             public string Response { get; set; }
-        }
-
     }
 }

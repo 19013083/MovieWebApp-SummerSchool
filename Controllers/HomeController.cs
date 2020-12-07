@@ -41,7 +41,7 @@ namespace My_movie_manager.Controllers
         string Baseurl = "http://www.omdbapi.com/?i=tt3896198&apikey=f8fabbc";
         public async Task<ActionResult> MovieDetails()
         {
-            List<movieDetails> singleMovie = new List<movieDetails>();
+            movieDetails singleMovie = new movieDetails();
 
             using (var client = new HttpClient())
             {
@@ -53,21 +53,23 @@ namespace My_movie_manager.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("api/Employee/GetAllEmployees");
+                HttpResponseMessage Res = await client.GetAsync(Baseurl);
 
                 //Checking the response is successful or not which is sent using HttpClient  
-                //if (Res.IsSuccessStatusCode)
-                //{
-                //    //Storing the response details recieved from web api   
-                //    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var MovieResponse = Res.Content.ReadAsStringAsync().Result;
 
-                //    //Deserializing the response recieved from web api and storing into the Employee list  
-                //    singleMovie = JsonConvert.DeserializeObject<List<movieDetails>>(EmpResponse);
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    singleMovie = JsonConvert.DeserializeObject<movieDetails>(MovieResponse);
 
-                //}
+                }
+
                 //returning the employee list to view  
                 return View(singleMovie);
             }
         }
+
     }
 }
