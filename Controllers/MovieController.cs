@@ -12,7 +12,7 @@ namespace My_movie_manager.Controllers
         string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc" + "&s=";
 
         //Search for a movie
-        [Route("MovieDetails/{movieName}")]
+        [Route("SearchMovie/{movieName}")]
         public ActionResult SearchMovie(string movieName)
         {
             Baseurl += movieName;

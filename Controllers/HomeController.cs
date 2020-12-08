@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using My_movie_manager.Models;
+using My_movie_manager.Services;
 using Newtonsoft.Json;
 
 namespace My_movie_manager.Controllers
@@ -41,11 +42,19 @@ namespace My_movie_manager.Controllers
         }
 
         //Hosted web API REST Service base url  
-        string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc" + "&i=";
 
         [Route("MovieDetails/{imdbId}")]
         public async Task<ActionResult> MovieDetails(string imdbId)
         {
+            //returning a single movie
+            return View(await Apiservice.getMovieByIdAsync(imdbId));
+        }
+        
+        [Route("MovieDetailsOld/{imdbId}")]
+        public async Task<ActionResult> MovieDetailsOld(string imdbId)
+        {
+            string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc" + "&i=";
+
             movieDetails singleMovie = new movieDetails();
 
             Baseurl += imdbId;
