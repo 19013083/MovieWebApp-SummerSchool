@@ -50,7 +50,8 @@ namespace My_movie_manager
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=moviedetails}");
+                    //pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
