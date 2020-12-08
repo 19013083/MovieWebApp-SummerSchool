@@ -10,15 +10,6 @@ namespace My_movie_manager.Controllers
 {
     public class MovieController : Controller
     {
-        string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc" + "&s=";
-
-        //Search for a movie
-        [Route("SearchMovie/{movieName}")]
-        public async Task<ActionResult> SearchMovie(string movieName)
-        {
-            return View(await ApiService.GetMovieAsync("t", movieName));
-        }
-        
         // GET: MovieController
         public ActionResult Index()
         {
@@ -26,10 +17,16 @@ namespace My_movie_manager.Controllers
         }
 
         // GET: MovieController/Details/5
-        [Route("movie/DetailsDetails/{imdbId}")]
+        [Route("movie/Detail/{imdbId}")]
         public async Task<ActionResult> Detail(string imdbId)
         {
             return View(await ApiService.GetMovieAsync("i", imdbId));
+        }
+        
+        [Route("movie/search/{imdbId}")]
+        public async Task<ActionResult> Search(string movieTitle)
+        {
+            return View(await ApiService.GetMovieAsync("t", movieTitle));
         }
 
         // GET: MovieController/Create
