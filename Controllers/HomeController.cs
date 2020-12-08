@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using My_movie_manager.Models;
 using Newtonsoft.Json;
@@ -15,10 +16,12 @@ namespace My_movie_manager.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -45,7 +48,9 @@ namespace My_movie_manager.Controllers
         {
             movieDetails singleMovie = new movieDetails();
 
-            var test = imdbId;
+            //Baseurl += imdbId;
+
+            Baseurl = _configuration.GetConnectionString("movieApiUrl") + imdbId;
 
             using (var client = new HttpClient())
             {
