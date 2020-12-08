@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using My_movie_manager.Services;
 
 namespace My_movie_manager.Controllers
 {
@@ -13,11 +14,9 @@ namespace My_movie_manager.Controllers
 
         //Search for a movie
         [Route("SearchMovie/{movieName}")]
-        public ActionResult SearchMovie(string movieName)
+        public async Task<ActionResult> SearchMovie(string movieName)
         {
-            
-
-            return View();
+            return View(await ApiService.GetMovieAsync("t", movieName));
         }
         
         // GET: MovieController
@@ -27,9 +26,10 @@ namespace My_movie_manager.Controllers
         }
 
         // GET: MovieController/Details/5
-        public ActionResult Details(int id)
+        [Route("movie/DetailsDetails/{imdbId}")]
+        public async Task<ActionResult> Detail(string imdbId)
         {
-            return View();
+            return View(await ApiService.GetMovieAsync("i", imdbId));
         }
 
         // GET: MovieController/Create
