@@ -38,7 +38,7 @@ namespace My_movie_manager.Controllers
         }
 
         //Hosted web API REST Service base url  
-        string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc";
+        string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc" + "&i=";
 
         [Route("MovieDetails/{imdbId}")]
         public async Task<ActionResult> MovieDetails(string imdbId)
