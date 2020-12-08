@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using My_movie_manager.Models.UserDetail;
 
 namespace My_movie_manager
 {
@@ -25,8 +27,8 @@ namespace My_movie_manager
         {
             services.AddControllersWithViews();
 
-            //services.AddDbContext<MvcMovieContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
+            services.AddDbContext<UserDetailContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("MovieWepAppDb")));
 
         }
 

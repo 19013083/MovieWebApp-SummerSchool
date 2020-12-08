@@ -48,9 +48,9 @@ namespace My_movie_manager.Controllers
         {
             movieDetails singleMovie = new movieDetails();
 
-            //Baseurl += imdbId;
+            Baseurl += imdbId;
 
-            Baseurl = _configuration.GetConnectionString("movieApiUrl") + imdbId;
+            //Baseurl = _configuration.GetConnectionString("movieApiUrl") + imdbId;
 
             using (var client = new HttpClient())
             {
