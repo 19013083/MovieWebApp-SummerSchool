@@ -15,7 +15,7 @@ namespace My_movie_manager.Controllers
         [Route("SearchMovie/{movieName}")]
         public ActionResult SearchMovie(string movieName)
         {
-            Baseurl += movieName;
+            
 
             return View();
         }

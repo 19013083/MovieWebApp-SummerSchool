@@ -17,12 +17,10 @@ namespace My_movie_manager.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -41,52 +39,20 @@ namespace My_movie_manager.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //Hosted web API REST Service base url  
 
         [Route("MovieDetails/{imdbId}")]
         public async Task<ActionResult> MovieDetails(string imdbId)
         {
             //returning a single movie
-            return View(await Apiservice.getMovieByIdAsync(imdbId));
+            return View(await ApiService.GetMovieAsync("i", imdbId));
         }
-        
-        [Route("MovieDetailsOld/{imdbId}")]
-        public async Task<ActionResult> MovieDetailsOld(string imdbId)
+
+        [Route("SearchForMovie/{movieName}")]
+        public async Task<ActionResult> SearchForMovie([Bind("Title")] movieDetails movieName)
         {
-            string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc" + "&i=";
+            string tempTemp = movieName.Title;
 
-            movieDetails singleMovie = new movieDetails();
-
-            Baseurl += imdbId;
-
-            //Baseurl = _configuration.GetConnectionString("movieApiUrl") + imdbId;
-
-            using (var client = new HttpClient())
-            {
-                //Passing service base url  
-                client.BaseAddress = new Uri(Baseurl);
-
-                client.DefaultRequestHeaders.Clear();
-                //Define request data format  
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync(Baseurl);
-
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
-                {
-                    //Storing the response details recieved from web api   
-                    var MovieResponse = Res.Content.ReadAsStringAsync().Result;
-
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    singleMovie = JsonConvert.DeserializeObject<movieDetails>(MovieResponse);
-
-                }
-
-                //returning the employee list to view  
-                return View(singleMovie);
-            }
+            return View(await ApiService.GetMovieAsync("s", movieName.Title));
         }
 
     }

@@ -19,11 +19,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label">Search for movie</label>
-                <input type="text" class="form-control" id="movieName" name="movieName" placeholder="Enter movie name" />
+                <input asp-for="Title" type="text" class="form-control" id="movieName" name="movieName" placeholder="Enter movie name" />
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Search movie" class="btn btn-primary" />
+                <input type="submit" value="Search" class="btn btn-primary" />
             </div>
 
         </form>

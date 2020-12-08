@@ -9,19 +9,17 @@ using System.Threading.Tasks;
 
 namespace My_movie_manager.Services
 {
-    public class Apiservice
+    public class ApiService
     {
         private static string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc";
-        private static string urlUseId = "&i=";
-        private static string urlUseSearch = "&s=";
 
-        public static async Task<movieDetails> getMovieByIdAsync(string imdbId)
+        public static async Task<movieDetails> GetMovieAsync(string action, string actionInput)
         {
             movieDetails singleMovie = new movieDetails();
 
-            Baseurl += urlUseId + imdbId;
+            Baseurl += "&"+action+"=" + actionInput;
 
-            //Baseurl = _configuration.GetConnectionString("movieApiUrl") + imdbId;
+            //Baseurl = _configuration.GetConnectionString("movieApiUrl") + urlUseId + imdbId;
 
             using (var client = new HttpClient())
             {
@@ -48,6 +46,24 @@ namespace My_movie_manager.Services
 
                 return singleMovie;
             }
+        }
+
+
+        public List<string> ListOfMovies()
+        {
+            var MovieList = new List<string>();
+            MovieList.Add("tt0114709");
+            MovieList.Add("tt0101414");
+            MovieList.Add("");
+            MovieList.Add("");
+            MovieList.Add("");
+            MovieList.Add("");
+            MovieList.Add("");
+            MovieList.Add("");
+            MovieList.Add("");
+            MovieList.Add("");
+
+            return MovieList;
         }
 
     }
