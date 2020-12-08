@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using My_movie_manager.Models;
 using My_movie_manager.Services;
 
 namespace My_movie_manager.Controllers
@@ -13,6 +14,8 @@ namespace My_movie_manager.Controllers
         // GET: MovieController
         public ActionResult Index()
         {
+
+
             return View();
         }
 

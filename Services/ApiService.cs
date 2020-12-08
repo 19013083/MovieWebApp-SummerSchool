@@ -48,20 +48,31 @@ namespace My_movie_manager.Services
             }
         }
 
-
-        public List<string> ListOfMovies()
+        //Get list of movies with their details
+        public async Task<List<movieDetails>> GetMovieListDataAsync()
         {
-            var MovieList = new List<string>();
+            List<movieDetails> MovieData = new List<movieDetails>();
+            for (int i = 0; i < GetListOfMovies().Count; i++)
+            {
+                MovieData.Add(await GetMovieAsync("i", GetListOfMovies().ElementAt(i)));
+            }
+
+            return MovieData;
+        }
+
+        private List<string> GetListOfMovies()
+        {
+            List<string> MovieList = new List<string>();
             MovieList.Add("tt0114709");
             MovieList.Add("tt0101414");
-            MovieList.Add("");
-            MovieList.Add("");
-            MovieList.Add("");
-            MovieList.Add("");
-            MovieList.Add("");
-            MovieList.Add("");
-            MovieList.Add("");
-            MovieList.Add("");
+            MovieList.Add("tt1691926");
+            MovieList.Add("tt4263482");
+            MovieList.Add("tt1375666");
+            MovieList.Add("tt5052448");
+            MovieList.Add("tt5281134");
+            MovieList.Add("tt0335266");
+            MovieList.Add("tt0499549");
+            MovieList.Add("tt0137523");
 
             return MovieList;
         }
