@@ -45,9 +45,7 @@ namespace My_movie_manager.Controllers
         {
             movieDetails singleMovie = new movieDetails();
 
-            //var test = imdbId;
-
-            Baseurl = Baseurl + imdbId;
+            var test = imdbId;
 
             using (var client = new HttpClient())
             {
