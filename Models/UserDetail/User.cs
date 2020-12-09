@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-
 namespace My_movie_manager.Models.UserDetail
 {
     public partial class User
