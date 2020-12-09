@@ -27,18 +27,20 @@ namespace My_movie_manager.Controllers
         }
 
         // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
+            int? id = HttpContext.Session.GetInt32("currentUser");
+
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("login");
             }
 
             var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
-                return NotFound();
+                return RedirectToAction("login");
             }
 
             return View(user);
@@ -59,11 +61,16 @@ namespace My_movie_manager.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Password = Security.ComputeSha256Hash(user.Password);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                HttpContext.Session.SetInt32("currentUser", user.UserId);
+                return RedirectToAction("index", "home");
             }
-            return RedirectToAction("index", "home");
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: Users/Edit/5
@@ -79,6 +86,7 @@ namespace My_movie_manager.Controllers
             {
                 return NotFound();
             }
+            user.Password = null;
             return View(user);
         }
 
@@ -112,7 +120,7 @@ namespace My_movie_manager.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("details");
             }
             return View(user);
         }
@@ -175,9 +183,9 @@ namespace My_movie_manager.Controllers
                     return Login();
                 }
 
-                //success, sending user to dashboard
+                //success, sending user to home
                 HttpContext.Session.SetInt32("currentUser", getUser.UserId);//storing PK of user
-                return RedirectToAction("home", "index", new { inFirstname = getUser.Firstname });
+                return RedirectToAction("index", "home");
 
             }
             return View();

@@ -29,8 +29,8 @@ namespace My_movie_manager
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
+                //options.IdleTimeout = TimeSpan.FromSeconds(10);
+                //options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
 

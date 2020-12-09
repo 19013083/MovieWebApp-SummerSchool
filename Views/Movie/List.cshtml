@@ -4,11 +4,8 @@
     ViewData["Title"] = "MovieList";
 }
 
-<h1>MovieList</h1>
+<h1>Movie list</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -19,15 +16,11 @@
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rated)
+                Rating
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Released)
             </th>
-            
             <th>
                 View in detail
             </th>
@@ -42,7 +35,7 @@
                 </a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Year)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rated)
@@ -51,11 +44,7 @@
                 @Html.DisplayFor(modelItem => item.Released)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Runtime)
-            </td>
-            
-            <td>
-                <a asp-action="detail" asp-controller="movie" asp-route-imdbId="@Html.DisplayFor(modelItem => item.imdbID)">View movie</a>
+                <a asp-action="detail" asp-controller="movie" asp-route-imdbid="@item.imdbID">View</a>
             </td>
             
             <td>
