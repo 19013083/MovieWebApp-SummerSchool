@@ -12,7 +12,7 @@ namespace My_movie_manager.Services
 {
     public class ApiService
     {   
-        //trying to get api link from "appsettings.json"
+        //trying to get api link from "appsettings.json", NOT working
         /* 
         private readonly IConfiguration _configuration;
 

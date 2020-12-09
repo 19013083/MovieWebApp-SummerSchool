@@ -38,7 +38,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                <img src="@Html.DisplayFor(modelItem => item.Poster)" alt="Movie poster" style="width:70px;height:100px;">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Year)
@@ -54,15 +54,12 @@
             </td>
             
             <td>
-                <a asp-action="" asp-controller="movie" asp-route-id="@item.imdbID">View movie</a>
-                @Html.DisplayFor(modelItem => item.imdbID)
+                <a asp-action="detail" asp-controller="movie" asp-route-imdbId="@Html.DisplayFor(modelItem => item.imdbID)">View movie</a>
             </td>
             
             <td>
-                <a asp-action="Edit" asp-route-id="@item.imdbID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.imdbID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.imdbID">Delete</a>
-            </td>
+                <a asp-action="addToMyMovieList" asp-route-id="@item.imdbID">Add to my movie list</a> |
+                </td>
         </tr>
 }
     </tbody>
