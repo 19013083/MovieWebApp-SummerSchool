@@ -66,7 +66,8 @@ namespace My_movie_manager.Services
             List<movieDetails> MovieData = new List<movieDetails>();
             for (int i = 0; i < GetListOfMovies().Count; i++)
             {
-                MovieData.Add(await GetMovieAsync("i", GetListOfMovies().ElementAt(i)));
+                movieDetails getMovie = await GetMovieAsync("i", GetListOfMovies().ElementAt(i));
+                MovieData.Add(getMovie);
             }
 
             return MovieData;
