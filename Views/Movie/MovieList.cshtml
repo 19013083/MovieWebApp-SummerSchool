@@ -1,0 +1,167 @@
+﻿@model IEnumerable<My_movie_manager.Models.movieDetails>
+
+@{
+    ViewData["Title"] = "MovieList";
+}
+
+<h1>MovieList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Released)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Runtime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Director)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Writer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Awards)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poster)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Metascore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imdbRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imdbVotes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DVD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BoxOffice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Production)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Website)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Response)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Released)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Runtime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Writer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Awards)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Poster)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Metascore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imdbRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imdbVotes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DVD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoxOffice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Production)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Website)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Response)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.imdbID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.imdbID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.imdbID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

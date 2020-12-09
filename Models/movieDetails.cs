@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace My_movie_manager.Models
             public string Metascore { get; set; }
             public string imdbRating { get; set; }
             public string imdbVotes { get; set; }
+            [Key]
             public string imdbID { get; set; }
             public string Type { get; set; }
             public string DVD { get; set; }

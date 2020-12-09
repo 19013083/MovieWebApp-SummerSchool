@@ -14,8 +14,6 @@ namespace My_movie_manager.Controllers
         // GET: MovieController
         public ActionResult Index()
         {
-
-
             return View();
         }
 
@@ -93,6 +91,11 @@ namespace My_movie_manager.Controllers
             {
                 return View();
             }
+        }
+
+        public async Task<IActionResult> MovieList()
+        {
+            return View(await ApiService.GetMovieListDataAsync());
         }
     }
 }

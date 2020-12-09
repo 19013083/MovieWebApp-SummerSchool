@@ -62,7 +62,7 @@ namespace My_movie_manager.Services
         }
 
         //Get list of moviesDetails(from api) as list
-        public async Task<List<movieDetails>> GetMovieListDataAsync()
+        public static async Task<List<movieDetails>> GetMovieListDataAsync()
         {
             List<movieDetails> MovieData = new List<movieDetails>();
             for (int i = 0; i < GetListOfMovies().Count; i++)
@@ -74,7 +74,7 @@ namespace My_movie_manager.Services
         }
 
         //List of movies(imdb IDs)
-        private List<string> GetListOfMovies()
+        private static List<string> GetListOfMovies()
         {
             List<string> MovieList = new List<string>();
             MovieList.Add("tt0114709");

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using My_movie_manager.Models;
 
 #nullable disable
 
@@ -38,5 +39,7 @@ namespace My_movie_manager.Models.UserDetail
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<My_movie_manager.Models.movieDetails> movieDetails { get; set; }
     }
 }
