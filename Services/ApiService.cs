@@ -31,19 +31,19 @@ namespace My_movie_manager.Services
         {
             movieDetails singleMovie = new movieDetails();
 
-            Baseurl += "&"+action+"=" + actionInput;
+            string tmepUrl = Baseurl + "&"+action+"=" + actionInput;
 
             using (var client = new HttpClient())
             {
                 //Passing service base url  
-                client.BaseAddress = new Uri(Baseurl);
+                client.BaseAddress = new Uri(tmepUrl);
 
                 client.DefaultRequestHeaders.Clear();
                 //Define request data format  
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync(Baseurl);
+                HttpResponseMessage Res = await client.GetAsync(tmepUrl);
 
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
