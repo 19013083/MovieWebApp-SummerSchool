@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace My_movie_manager.Models.FavouriteUserMovie
 {
-    [Keyless]
     [Table("favouriteUserMovie")]
     public partial class FavouriteUserMovie
     {
+        [Key]
         [Column("User_id")]
         public int? UserId { get; set; }
         [Column("movieId")]
