@@ -1,4 +1,5 @@
-﻿using My_movie_manager.Models;
+﻿using Microsoft.Extensions.Configuration;
+using My_movie_manager.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,28 @@ using System.Threading.Tasks;
 namespace My_movie_manager.Services
 {
     public class ApiService
-    {
+    {   
+        //trying to get api link from "appsettings.json"
+        /* 
+        private readonly IConfiguration _configuration;
+
+        public ApiService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        string apiUrlFromJSON = _configuration.GetConnectionString("movieApiUrl") + urlUseId + imdbId;
+        */
+        
         private static string Baseurl = "http://www.omdbapi.com/?apikey=f8fabbc";
 
+        //Return movieDetails() from API
         public static async Task<movieDetails> GetMovieAsync(string action, string actionInput)
         {
             movieDetails singleMovie = new movieDetails();
 
             Baseurl += "&"+action+"=" + actionInput;
 
-            //Baseurl = _configuration.GetConnectionString("movieApiUrl") + urlUseId + imdbId;
 
             using (var client = new HttpClient())
             {
@@ -48,7 +61,7 @@ namespace My_movie_manager.Services
             }
         }
 
-        //Get list of movies with their details
+        //Get list of moviesDetails(from api) as list
         public async Task<List<movieDetails>> GetMovieListDataAsync()
         {
             List<movieDetails> MovieData = new List<movieDetails>();
@@ -60,6 +73,7 @@ namespace My_movie_manager.Services
             return MovieData;
         }
 
+        //List of movies(imdb IDs)
         private List<string> GetListOfMovies()
         {
             List<string> MovieList = new List<string>();

@@ -19,9 +19,9 @@ namespace My_movie_manager.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public string Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return "Nothing to view here";
         }
 
         // GET: Users/Details/5
@@ -147,6 +147,36 @@ namespace My_movie_manager.Controllers
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.UserId == id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(string inUsername, string inPassword)
+        {
+            if (ModelState.IsValid)
+            {
+                string hashPassword = workerInLogin.ComputeSha256Hash(inPassword);
+
+                Users getUser = await _context.Users
+                    .FirstOrDefaultAsync(m => m.Username.Equals(inUsername) & m.Password.Equals(hashPassword));
+
+                if (getUser == null)
+                {
+                    ViewBag.ViewBag.userNotFound = "User found, check username.";
+                    return Login();
+                }
+
+                //success, sending user to dashboard
+                HttpContext.Session.SetInt32("currentUser", getUser.UserId);//storing PK of user
+                return RedirectToAction("dashboard", "Home", new { inFirstname = getUser.Firstname });
+
+            }
+            return View();
+        }
+
+        public string Signout()
+        {
+            return "under construction";
         }
     }
 }
