@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using My_movie_manager.Models.UserDetail;
+using My_movie_manager.Services;
 
 namespace My_movie_manager.Controllers
 {
@@ -61,7 +63,7 @@ namespace My_movie_manager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return RedirectToAction("index", "home");
         }
 
         // GET: Users/Edit/5
@@ -149,34 +151,42 @@ namespace My_movie_manager.Controllers
             return _context.Users.Any(e => e.UserId == id);
         }
 
+        //Return login page
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        //Get login info
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(string inUsername, string inPassword)
+        public async Task<IActionResult> Login(string inUserEmail, string inPassword)
         {
             if (ModelState.IsValid)
             {
-                string hashPassword = workerInLogin.ComputeSha256Hash(inPassword);
+                string hashPassword = Security.ComputeSha256Hash(inPassword);
 
-                Users getUser = await _context.Users
-                    .FirstOrDefaultAsync(m => m.Username.Equals(inUsername) & m.Password.Equals(hashPassword));
+                User getUser = await _context.Users
+                    .FirstOrDefaultAsync(m => m.Email.Equals(inUserEmail) & m.Password.Equals(hashPassword));
 
                 if (getUser == null)
                 {
-                    ViewBag.ViewBag.userNotFound = "User found, check username.";
+                    ViewBag.userNotFound = "Not found in database, please check your details.";
                     return Login();
                 }
 
                 //success, sending user to dashboard
                 HttpContext.Session.SetInt32("currentUser", getUser.UserId);//storing PK of user
-                return RedirectToAction("dashboard", "Home", new { inFirstname = getUser.Firstname });
+                return RedirectToAction("home", "index", new { inFirstname = getUser.Firstname });
 
             }
             return View();
         }
 
-        public string Signout()
+        public IActionResult Signout()
         {
-            return "under construction";
+            HttpContext.Session.Clear();
+            return RedirectToAction("index", "home");
         }
     }
 }
