@@ -24,7 +24,7 @@ namespace My_movie_manager.Controllers
             return View(await ApiService.GetMovieAsync("i", imdbId));
         }
         
-        [Route("movie/search/{imdbId}")]
+        [Route("movie/search/{movieTitle}")]
         public async Task<ActionResult> Search(string movieTitle)
         {
             return View(await ApiService.GetMovieAsync("t", movieTitle));
