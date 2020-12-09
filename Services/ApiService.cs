@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿    using Microsoft.Extensions.Configuration;
 using My_movie_manager.Models;
 using Newtonsoft.Json;
 using System;
@@ -32,7 +32,6 @@ namespace My_movie_manager.Services
             movieDetails singleMovie = new movieDetails();
 
             Baseurl += "&"+action+"=" + actionInput;
-
 
             using (var client = new HttpClient())
             {
