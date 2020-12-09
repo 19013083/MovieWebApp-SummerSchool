@@ -39,21 +39,5 @@ namespace My_movie_manager.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        [Route("MovieDetails/{imdbId}")]
-        public async Task<ActionResult> MovieDetails(string imdbId)
-        {
-            //returning a single movie
-            return View(await ApiService.GetMovieAsync("i", imdbId));
-        }
-
-        [Route("SearchForMovie/{movieName}")]
-        public async Task<ActionResult> SearchForMovie([Bind("Title")] movieDetails movieName)
-        {
-            string tempTemp = movieName.Title;
-
-            return View(await ApiService.GetMovieAsync("s", movieName.Title));
-        }
-
     }
 }

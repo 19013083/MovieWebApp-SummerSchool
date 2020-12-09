@@ -1,13 +1,16 @@
 ﻿@model My_movie_manager.Models.movieDetails
 
 @{
-    ViewData["Title"] = "Movie Detail";
+    ViewData["Title"] = "MovieDetails";
 }
 
 <h1>MovieDetails</h1>
 
 <div>
     <h4>movieDetails</h4>
+
+    <h1 style="color:red">THIS NEEDS TO BE SEARCH RESULT</h1>
+
     <hr />
     <dl class="row">
 
@@ -167,5 +170,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="index">Back to home</a>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
 </div>
