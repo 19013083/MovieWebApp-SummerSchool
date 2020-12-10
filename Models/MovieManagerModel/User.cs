@@ -10,19 +10,22 @@ namespace My_movie_manager.Models.MovieManagerModel
 {
     public partial class User
     {
+        public User()
+        {
+            FavouriteUserMovies = new HashSet<FavouriteUserMovie>();
+        }
+
         [Key]
         [Column("User_Id")]
         public int UserId { get; set; }
-        [Required(ErrorMessage = "Enter your email")]
+        [Required]
         [StringLength(255)]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Enter your Name")]
+        [Required]
         [StringLength(225)]
         public string Firstname { get; set; }
-        [Required(ErrorMessage = "Enter your Surname")]
         [StringLength(225)]
         public string Surname { get; set; }
-        [Required(ErrorMessage = "Create a new password")]
         [Column("password")]
         [StringLength(225)]
         public string Password { get; set; }
@@ -30,5 +33,8 @@ namespace My_movie_manager.Models.MovieManagerModel
         public string FavoriteMovie { get; set; }
         [Column(TypeName = "date")]
         public DateTime? DateOfBirth { get; set; }
+
+        [InverseProperty(nameof(FavouriteUserMovie.User))]
+        public virtual ICollection<FavouriteUserMovie> FavouriteUserMovies { get; set; }
     }
 }

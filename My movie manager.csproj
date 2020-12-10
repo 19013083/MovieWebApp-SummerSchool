@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\FavouriteUserMovies\**" />
-    <Content Remove="Views\FavouriteUserMovies\**" />
-    <EmbeddedResource Remove="Views\FavouriteUserMovies\**" />
-    <None Remove="Views\FavouriteUserMovies\**" />
+    <Compile Remove="Models\FavouriteUserMovie\**" />
+    <Content Remove="Models\FavouriteUserMovie\**" />
+    <EmbeddedResource Remove="Models\FavouriteUserMovie\**" />
+    <None Remove="Models\FavouriteUserMovie\**" />
   </ItemGroup>
 
   <ItemGroup>

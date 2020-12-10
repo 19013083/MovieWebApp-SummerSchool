@@ -12,13 +12,14 @@ namespace My_movie_manager.Models.MovieManagerModel
     public partial class FavouriteUserMovie
     {
         [Key]
-        [Column("User_id")]
+        public int Id { get; set; }
+        [Column("User_Id")]
         public int? UserId { get; set; }
-        [Column("movieId")]
         [StringLength(255)]
         public string MovieId { get; set; }
 
         [ForeignKey(nameof(UserId))]
+        [InverseProperty("FavouriteUserMovies")]
         public virtual User User { get; set; }
     }
 }
