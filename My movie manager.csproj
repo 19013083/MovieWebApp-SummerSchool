@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\FavouriteUserMovies\**" />
+    <Content Remove="Views\FavouriteUserMovies\**" />
+    <EmbeddedResource Remove="Views\FavouriteUserMovies\**" />
+    <None Remove="Views\FavouriteUserMovies\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
