@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using My_movie_manager.Models.UserDetail;
+using My_movie_manager.Models.MovieManagerModel;
 using My_movie_manager.Services;
 
 namespace My_movie_manager.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly UserDetailContext _context;
+        private readonly MovieManagerModelContext _context;
 
-        public UsersController(UserDetailContext context)
+        public UsersController(MovieManagerModelContext context)
         {
             _context = context;
         }

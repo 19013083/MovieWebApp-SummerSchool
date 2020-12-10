@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using My_movie_manager.Models.UserDetail;
+using My_movie_manager.Models.MovieManagerModel;
 
 namespace My_movie_manager
 {
@@ -36,7 +36,7 @@ namespace My_movie_manager
 
             services.AddControllersWithViews();
 
-            services.AddDbContext<UserDetailContext>(options =>
+            services.AddDbContext<MovieManagerModelContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("MovieWepAppDb")));
 
             services.AddControllersWithViews();

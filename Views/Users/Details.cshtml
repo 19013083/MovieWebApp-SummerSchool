@@ -1,4 +1,4 @@
-﻿@model My_movie_manager.Models.UserDetail.User
+﻿@model My_movie_manager.Models.MovieManagerModel.User
 
 @{
     ViewData["Title"] = "Details";
@@ -50,6 +50,7 @@
 </div>
 <div>
 
+    <a asp-action="index" asp-controller="favouriteUserMovies">View my movies</a> |
     <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> |
     <a asp-action="Index" asp-controller="home">Back to home</a>
 </div>
