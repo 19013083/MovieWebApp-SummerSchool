@@ -22,7 +22,9 @@ namespace My_movie_manager.Controllers
         // GET: FavouriteUserMovies
         public async Task<IActionResult> Index()
         {
-            var movieManagerModelContext = _context.FavouriteUserMovies.Include(f => f.User).Where(U => U.UserId.Equals(4));
+            int tempUserId = (int)HttpContext.Session.GetInt32("currentUser");
+
+            var movieManagerModelContext = _context.FavouriteUserMovies.Where(f => f.UserId.Equals(tempUserId));
             return View(await movieManagerModelContext.ToListAsync());
         }
 
