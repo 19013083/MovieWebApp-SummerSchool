@@ -4,20 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Favourite movie list</h1>
+
+<h4>These are all your favourite movies</h4>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add new movie</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MovieId)
+                Movie Id
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -28,12 +28,10 @@
                 @Html.DisplayFor(modelItem => item.MovieId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a href="/movie/detail/@item.MovieId">View movie details</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Change</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">View entry details</a> |
+                <a style="color:red" asp-action="Delete" asp-route-id="@item.Id">Remvoe</a>
             </td>
         </tr>
 }

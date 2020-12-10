@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,13 +22,25 @@ namespace My_movie_manager.Controllers
         // GET: FavouriteUserMovies
         public async Task<IActionResult> Index()
         {
-            var movieManagerModelContext = _context.FavouriteUserMovies.Include(f => f.User);
+            int tempUserId;
+
+            try
+            {
+                tempUserId = (int)HttpContext.Session.GetInt32("currentUser");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+            var movieManagerModelContext = _context.FavouriteUserMovies.Where(f => f.UserId.Equals(tempUserId));
             return View(await movieManagerModelContext.ToListAsync());
         }
 
         // GET: FavouriteUserMovies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -41,13 +54,16 @@ namespace My_movie_manager.Controllers
                 return NotFound();
             }
 
+            //string tempMovieId = favouriteUserMovie.MovieId;
+
+            //return Redirect(Url.RouteUrl(new { controller = "movie", action = "detail", tempMovieId }));
+
             return View(favouriteUserMovie);
         }
 
         // GET: FavouriteUserMovies/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
             return View();
         }
 
@@ -56,16 +72,21 @@ namespace My_movie_manager.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,MovieId")] FavouriteUserMovie favouriteUserMovie)
+        public async Task<IActionResult> Create([Bind("Id,MovieId")] FavouriteUserMovie favouriteUserMovie)
         {
+            if(HttpContext.Session.GetInt32("currentUser") == null)
+            {
+                return RedirectToAction("login", "users");
+            }
+
+            favouriteUserMovie.UserId = HttpContext.Session.GetInt32("currentUser"); 
             if (ModelState.IsValid)
             {
                 _context.Add(favouriteUserMovie);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", favouriteUserMovie.UserId);
-            return View(favouriteUserMovie);
+
+            return RedirectToAction("index");
         }
 
         // GET: FavouriteUserMovies/Edit/5
@@ -101,6 +122,7 @@ namespace My_movie_manager.Controllers
             {
                 try
                 {
+                    favouriteUserMovie.UserId = (int)HttpContext.Session.GetInt32("currentUser");
                     _context.Update(favouriteUserMovie);
                     await _context.SaveChangesAsync();
                 }
