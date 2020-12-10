@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using My_movie_manager.Models;
 using My_movie_manager.Models.MovieManagerModel;
 using My_movie_manager.Services;
@@ -35,6 +36,29 @@ namespace My_movie_manager.Controllers
         public async Task<IActionResult> List()
         {
             return View(await ApiService.GetMovieListDataAsync());
+        }
+
+
+        //Trying to return personal list
+        public async Task<IActionResult> ListV2(string testing)
+        {
+            int tempUserId;
+
+            try
+            {
+                tempUserId = (int)HttpContext.Session.GetInt32("currentUser");
+
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("login", "users");
+            }
+
+            var getUserFavData = _context.FavouriteUserMovies.Where(f => f.UserId.Equals(tempUserId));
+
+            var userFavList = await getUserFavData.ToListAsync();
+
+            return View(await ApiService.GetMovieListDataAsyncVersion2(userFavList.ToList()));
         }
 
         [HttpGet]

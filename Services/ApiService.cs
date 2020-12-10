@@ -1,5 +1,6 @@
 ﻿    using Microsoft.Extensions.Configuration;
 using My_movie_manager.Models;
+using My_movie_manager.Models.MovieManagerModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,19 @@ namespace My_movie_manager.Services
             for (int i = 0; i < GetListOfMovies().Count; i++)
             {
                 movieDetails getMovie = await GetMovieAsync("i", GetListOfMovies().ElementAt(i));
+                MovieData.Add(getMovie);
+            }
+
+            return MovieData;
+        }
+        
+        public static async Task<List<movieDetails>> GetMovieListDataAsyncVersion2(List<FavouriteUserMovie> listOfMovies)
+        {
+
+            List<movieDetails> MovieData = new List<movieDetails>();
+            for (int i = 0; i < listOfMovies.Count; i++)
+            {
+                movieDetails getMovie = await GetMovieAsync("i", listOfMovies.ElementAt(i).MovieId);
                 MovieData.Add(getMovie);
             }
 

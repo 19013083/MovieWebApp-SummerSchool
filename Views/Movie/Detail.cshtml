@@ -27,8 +27,8 @@
             Add to fav
         </dt>
         <dd class="col-sm-10">
-            <a asp-action="AddToFav" asp-route-imdbId=@Html.DisplayFor(model => model.imdbID) >Add to fav</a>
-            <a href="/movie/AddToFav/@Html.DisplayFor(model => model.imdbID)">content 2 </a>
+            <a asp-action="AddToFav" asp-route-imdbId="@Model.imdbID" >Add to fav, error 1</a>
+            @*<a href="/movie/AddToFav/@Html.DisplayFor(model => model.imdbID)">Add to fav, error 2</a>*@
         </dd>
         
         <dt class="col-sm-2">
