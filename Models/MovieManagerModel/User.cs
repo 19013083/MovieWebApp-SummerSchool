@@ -32,6 +32,7 @@ namespace My_movie_manager.Models.MovieManagerModel
         [StringLength(255)]
         public string FavoriteMovie { get; set; }
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
 
         [InverseProperty(nameof(FavouriteUserMovie.User))]
