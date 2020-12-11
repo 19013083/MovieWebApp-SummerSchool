@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,6 @@ namespace My_movie_manager.Controllers
         public UsersController(MovieManagerModelContext context)
         {
             _context = context;
-
         }
 
         // GET: Users
@@ -187,20 +187,7 @@ namespace My_movie_manager.Controllers
                     return Login();
                 }
 
-                //success, sending user to home
                 HttpContext.Session.SetInt32("currentUser", getUser.UserId);//storing PK of user
-
-                ViewBag.users = false;
-
-                if (HttpContext.Session.GetInt32("currentUser") == null)
-                {
-                    ViewBag.users = false;
-                }
-                else
-                {
-                    ViewBag.users = true;
-                }
-
 
                 return RedirectToAction("details", "users");
 
