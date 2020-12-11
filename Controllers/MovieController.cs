@@ -33,14 +33,40 @@ namespace My_movie_manager.Controllers
             return View(await ApiService.GetMovieAsync("i", imdbId));
         }
 
-        public async Task<IActionResult> List()
+        [Route("movie/list/{view}")]
+        public async Task<IActionResult> List(string view)
         {
-            return View(await ApiService.GetMovieListDataAsync());
+            if (String.IsNullOrEmpty(view))
+            {
+                return View(await ApiService.GetMovieListDataAsync());
+            }
+            else if(view.Equals("mine"))
+            {
+                int tempUserId;
+
+                try
+                {
+                    tempUserId = (int)HttpContext.Session.GetInt32("currentUser");
+
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("login", "users");
+                }
+
+                var getUserFavData = _context.FavouriteUserMovies.Where(f => f.UserId.Equals(tempUserId));
+
+                var userFavList = await getUserFavData.ToListAsync();
+
+                return View(await ApiService.GetMovieListDataAsyncVersion2(userFavList));
+            }
+
+            return NotFound();
         }
 
 
         //Trying to return personal list
-        public async Task<IActionResult> ListV2(string testing)
+        public async Task<IActionResult> ListV2()
         {
             int tempUserId;
 
@@ -58,6 +84,7 @@ namespace My_movie_manager.Controllers
 
             var userFavList = await getUserFavData.ToListAsync();
 
+            //return RedirectToAction("list");
             return View(await ApiService.GetMovieListDataAsyncVersion2(userFavList.ToList()));
         }
 

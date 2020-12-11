@@ -185,7 +185,7 @@ namespace My_movie_manager.Controllers
 
                 //success, sending user to home
                 HttpContext.Session.SetInt32("currentUser", getUser.UserId);//storing PK of user
-                return RedirectToAction("index", "home");
+                return RedirectToAction("details", "users");
 
             }
             return View();

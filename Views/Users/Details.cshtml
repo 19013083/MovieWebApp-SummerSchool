@@ -32,7 +32,7 @@
             @Html.DisplayNameFor(model => model.Password)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
+            ********
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FavoriteMovie)
@@ -49,8 +49,13 @@
     </dl>
 </div>
 <div>
+    <a asp-action="index" asp-controller="favouriteUserMovies">View my movies</a> 
+    <br />
+    <br />
+    <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> 
+</div>
 
-    <a asp-action="index" asp-controller="favouriteUserMovies">View my movies</a> |
-    <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> |
+<div>
+    <br />
     <a asp-action="Index" asp-controller="home">Back to home</a>
 </div>

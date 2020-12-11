@@ -21,36 +21,31 @@
             <th>
                 @Html.DisplayNameFor(model => model.Released)
             </th>
-            <th>
-                View in detail
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a href="@Html.DisplayFor(modelItem => item.Poster)"><img src="@Html.DisplayFor(modelItem => item.Poster)" alt="Movie poster" style="width:70px;height:100px;">
-                </a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Released)
-            </td>
-            <td>
-                <a asp-action="detail" asp-controller="movie" asp-route-imdbid="@item.imdbID">View</a>
-            </td>
-            
-            <td>
-                <a asp-action="detail" asp-controller="movie" asp-route-imdbid="@item.imdbID">View</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Html.DisplayFor(modelItem => item.Poster)">
+                        <img src="@Html.DisplayFor(modelItem => item.Poster)" alt="Movie poster" style="width:70px;height:100px;">
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="detail" asp-controller="movie" asp-route-imdbid="@item.imdbID">@Html.DisplayFor(modelItem => item.Title)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Released)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div>
+    <a href="/movie/index">Back to movie index</a>
+</div> 
+
