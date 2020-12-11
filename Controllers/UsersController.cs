@@ -96,7 +96,7 @@ namespace My_movie_manager.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,Email,Firstname,Surname,Password,FavoriteMovie,DateOfBirth")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Email,Firstname,Surname,Password,FavoriteMovie,DateOfBirth")] User user)
         {
             if (id != user.UserId)
             {
@@ -107,6 +107,9 @@ namespace My_movie_manager.Controllers
             {
                 try
                 {
+                    user.UserId = (int)HttpContext.Session.GetInt32("currentUser");
+                    user.Password = Security.ComputeSha256Hash(user.Password);
+
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }

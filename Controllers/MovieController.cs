@@ -33,35 +33,9 @@ namespace My_movie_manager.Controllers
             return View(await ApiService.GetMovieAsync("i", imdbId));
         }
 
-        [Route("movie/list/{view}")]
-        public async Task<IActionResult> List(string view)
+        public async Task<IActionResult> List()
         {
-            if (String.IsNullOrEmpty(view))
-            {
-                return View(await ApiService.GetMovieListDataAsync());
-            }
-            else if(view.Equals("mine"))
-            {
-                int tempUserId;
-
-                try
-                {
-                    tempUserId = (int)HttpContext.Session.GetInt32("currentUser");
-
-                }
-                catch (Exception)
-                {
-                    return RedirectToAction("login", "users");
-                }
-
-                var getUserFavData = _context.FavouriteUserMovies.Where(f => f.UserId.Equals(tempUserId));
-
-                var userFavList = await getUserFavData.ToListAsync();
-
-                return View(await ApiService.GetMovieListDataAsyncVersion2(userFavList));
-            }
-
-            return NotFound();
+            return View(await ApiService.GetMovieListDataAsync());
         }
 
 
