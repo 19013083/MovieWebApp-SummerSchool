@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] Movie explorer</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    
+
 </head>
 <body>
     <header>
@@ -19,14 +19,25 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+
+
+
+                        @if (ViewBag.users)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Signout">log out</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="movie" asp-action="index">Movies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Signout">log out</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="create">Sign up</a>
@@ -37,11 +48,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        
+
                         <li>
-                            <form class="d-flex" >
-                                <input class="form-control media" placeholder="Movie search" aria-label="Search">
-                                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                            <form class="d-flex" asp-controller="movie" asp-action="search">
+                                <input class="form-control media"  id="movieName" name="movieTitle"  placeholder="Movie search" aria-label="Search">
+                                <button class="btn btn-outline-secondary ml-2" type="submit">Search</button>
                             </form>
                         </li>
                     </ul>
@@ -66,3 +77,11 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+
+<script>
+    if (!(session["sessionName"])){
+        NotLoggedInPH.visible = false;
+        LoggedInPH.visible= true;
+    }
+</script>    

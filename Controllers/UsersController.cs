@@ -185,6 +185,19 @@ namespace My_movie_manager.Controllers
 
                 //success, sending user to home
                 HttpContext.Session.SetInt32("currentUser", getUser.UserId);//storing PK of user
+
+                ViewBag.users = false;
+
+                if (HttpContext.Session.GetInt32("currentUser") == null)
+                {
+                    ViewBag.users = false;
+                }
+                else
+                {
+                    ViewBag.users = true;
+                }
+
+
                 return RedirectToAction("details", "users");
 
             }
