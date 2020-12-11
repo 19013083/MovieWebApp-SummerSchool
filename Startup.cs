@@ -31,7 +31,7 @@ namespace My_movie_manager
             {
                 //options.IdleTimeout = TimeSpan.FromSeconds(10);
                 //options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
+                //options.Cookie.IsEssential = true;
             });
 
             services.AddControllersWithViews();

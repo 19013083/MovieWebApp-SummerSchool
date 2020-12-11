@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@*@inject IHttpContextAccessor HttpContextAccessor*@
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,9 +11,9 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
-<body>
+<body style="background-color:beige">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:azure;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="        background-color: #f7e9c1;">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Movie explorer</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,38 +23,42 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
 
-
-
-                        @if (ViewBag.users)
+                        @if (ViewBag.users == false)
                         {
+                            @*No profile*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Signout">log out</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="details">View profile</a>
                             </li>
 
                         }
                         else
                         {
+                            @*User has profile*@
+
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Signout">log out</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="create">Sign up</a>
+                            </li>
+
                         }
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="movie" asp-action="index">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="create">Sign up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="details">View profile</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
-                        <li>
+                        <li class="ml-auto">
                             <form class="d-flex" asp-controller="movie" asp-action="search">
-                                <input class="form-control media"  id="movieName" name="movieTitle"  placeholder="Movie search" aria-label="Search">
+                                <input class="form-control media" id="movieName" name="movieTitle" placeholder="Movie search" aria-label="Search">
                                 <button class="btn btn-outline-secondary ml-2" type="submit">Search</button>
                             </form>
                         </li>
@@ -80,8 +87,8 @@
 
 
 <script>
-    if (!(session["sessionName"])){
+    if (!(session["sessionName"])) {
         NotLoggedInPH.visible = false;
-        LoggedInPH.visible= true;
+        LoggedInPH.visible = true;
     }
 </script>    

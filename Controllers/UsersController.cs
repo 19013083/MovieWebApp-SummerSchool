@@ -18,6 +18,7 @@ namespace My_movie_manager.Controllers
         public UsersController(MovieManagerModelContext context)
         {
             _context = context;
+
         }
 
         // GET: Users
